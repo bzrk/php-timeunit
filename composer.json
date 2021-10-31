@@ -1,8 +1,8 @@
 {
   "name": "bzrk/php-timeunit",
-  "description": "description",
+  "description": "A library for better reading Time definitions ",
   "minimum-stability": "stable",
-  "license": "proprietary",
+  "license": ["MIT"],
   "authors": [
     {
       "name": "Thomas Wünsche"
