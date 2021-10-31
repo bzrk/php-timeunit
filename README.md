@@ -44,3 +44,12 @@ function a(TimeUnit $time) {
 a(TimeUnit::ofSeconds(12));
 a(TimeUnit::ofSeconds(-12)); throws a InvalidArgumentException
 ```
+
+## Running tests
+```shell
+composer verify
+```
+
+```shell
+docker-compose up
+```
