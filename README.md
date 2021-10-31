@@ -9,18 +9,18 @@ better readable code
 
 __Plain PHP__
 ```php
-sleep(60*60*3) // 3 Hours
-sleep(60*45) // 45 Minutes
+sleep(60*60*3); // 3 Hours
+sleep(60*45); // 45 Minutes
 
-$time = \time() - (60*60*3);
+$time = \time(); - (60*60*3);
 ```
 
 __PHP Timeunit__
 ```php
-TimeUnit::ofHours(3)->sleep()
-TimeUnit::ofMinutes(45)->sleep()
+TimeUnit::ofHours(3)->sleep();
+TimeUnit::ofMinutes(45)->sleep();
 
-TimeUnit::now()->minus(TimeUnit::ofMinutes(3))
+TimeUnit::now()->minus(TimeUnit::ofMinutes(3));
 ```
 ---
 
