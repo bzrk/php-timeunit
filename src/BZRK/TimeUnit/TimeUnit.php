@@ -4,6 +4,10 @@ declare(strict_types=1);
 
 namespace BZRK\TimeUnit;
 
+use InvalidArgumentException;
+
+use function sleep;
+
 class TimeUnit
 {
     private function __construct(private int $seconds)
@@ -15,8 +19,11 @@ class TimeUnit
         return new TimeUnit(time());
     }
 
-    public static function create(TimeUnits $timeUnits, int $val): self
+    private static function create(TimeUnits $timeUnits, int $val): self
     {
+        if ($val < 0) {
+            throw new InvalidArgumentException("val must greater than 0");
+        }
         return new TimeUnit($val * $timeUnits->val);
     }
 
@@ -50,13 +57,18 @@ class TimeUnit
         return $this->seconds * 1000;
     }
 
-    public function minus(int $val, TimeUnits $timeUnits): self
+    public function sleep(): void
     {
-        return new TimeUnit($this->seconds - ($val * $timeUnits->val));
+        sleep($this->seconds);
     }
 
-    public function plus(int $val, TimeUnits $timeUnits): self
+    public function minus(TimeUnit $timeUnit): self
     {
-        return new TimeUnit($this->seconds + ($val * $timeUnits->val));
+        return new TimeUnit($this->seconds - $timeUnit->seconds());
+    }
+
+    public function plus(TimeUnit $timeUnit): self
+    {
+        return new TimeUnit($this->seconds + $timeUnit->seconds());
     }
 }
