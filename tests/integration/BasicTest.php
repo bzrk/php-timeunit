@@ -11,7 +11,7 @@ use PHPUnit\Framework\TestCase;
 class BasicsTest extends TestCase
 {
     /**
-     * @dataProvider dataProviderTestCreate
+     * @dataProvider dataProvider
      */
     public function testCreateFromSeconds(int $val): void
     {
@@ -19,7 +19,7 @@ class BasicsTest extends TestCase
     }
 
     /**
-     * @dataProvider dataProviderTestCreate
+     * @dataProvider dataProvider
      */
     public function testCreateFromMinutes(int $val): void
     {
@@ -27,7 +27,7 @@ class BasicsTest extends TestCase
     }
 
     /**
-     * @dataProvider dataProviderTestCreate
+     * @dataProvider dataProvider
      */
     public function testCreateFromHours(int $val): void
     {
@@ -35,20 +35,15 @@ class BasicsTest extends TestCase
     }
 
     /**
-     * @dataProvider dataProviderTestCreate
+     * @dataProvider dataProvider
      */
     public function testCreateFromDays(int $val): void
     {
         self::assertThat(TimeUnit::ofDays($val)->seconds(), self::equalTo($val * 86400));
     }
 
-    public static function dataProviderTestCreate(): array
-    {
-        return [[1], [12], [2000]];
-    }
-
     /**
-     * @dataProvider dataProviderTestCreate
+     * @dataProvider dataProvider
      */
     public function testMillis(int $val): void
     {
@@ -65,5 +60,11 @@ class BasicsTest extends TestCase
     {
         $timeUnit = TimeUnit::ofSeconds(2000);
         self::assertThat($timeUnit->minus(2, TimeUnits::minutes())->seconds(), self::equalTo(1880));
+    }
+
+    /** @return array<array<int>> */
+    public static function dataProvider(): array
+    {
+        return [[1], [12], [2000]];
     }
 }
