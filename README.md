@@ -2,7 +2,7 @@
 
 ---
 
-A library for better reading Time definitions 
+A library for better reading of time definitions
 
 ## Examples
 better readable code
