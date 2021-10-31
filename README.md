@@ -49,7 +49,7 @@ a(TimeUnit::ofSeconds(-12)); throws a InvalidArgumentException
 ```shell
 composer verify
 ```
-
+or 
 ```shell
 docker-compose up
 ```
