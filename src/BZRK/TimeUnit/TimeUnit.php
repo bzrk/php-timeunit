@@ -10,8 +10,11 @@ use function sleep;
 
 class TimeUnit
 {
-    private function __construct(private int $seconds)
+    private int $seconds;
+
+    public function __construct(int $seconds)
     {
+        $this->seconds = $seconds;
     }
 
     public static function now(): self
@@ -24,7 +27,7 @@ class TimeUnit
         if ($val < 0) {
             throw new InvalidArgumentException("val must greater than 0");
         }
-        return new TimeUnit($val * $timeUnits->val);
+        return new TimeUnit($val * $timeUnits->val());
     }
 
     public static function ofSeconds(int $val): self

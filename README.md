@@ -51,5 +51,6 @@ composer verify
 ```
 or 
 ```shell
-docker-compose up
+docker-compose up php8
+docker-compose up php7
 ```
