@@ -6,8 +6,11 @@ namespace BZRK\TimeUnit;
 
 class TimeUnits
 {
-    protected function __construct(public int $val)
+    private int $val;
+
+    public function __construct(int $val)
     {
+        $this->val = $val;
     }
 
     public static function seconds(): TimeUnits
@@ -28,5 +31,10 @@ class TimeUnits
     public static function days(): TimeUnits
     {
         return new TimeUnits(self::hours()->val * 24);
+    }
+
+    public function val(): int
+    {
+        return $this->val;
     }
 }
