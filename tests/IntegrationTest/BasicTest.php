@@ -69,7 +69,15 @@ class BasicTest extends TestCase
     /**
      * @dataProvider dataProvider
      */
-    public function testMillis(int $val): void
+    public function testMillisFromMilliSeconds(int $val): void
+    {
+        self::assertThat(TimeUnit::ofMilliSeconds($val)->millis(), self::equalTo($val));
+    }
+
+    /**
+     * @dataProvider dataProvider
+     */
+    public function testMillisFromSeconds(int $val): void
     {
         self::assertThat(TimeUnit::ofSeconds($val)->millis(), self::equalTo($val * 1000));
     }
@@ -84,6 +92,15 @@ class BasicTest extends TestCase
     {
         $timeUnit = TimeUnit::ofSeconds(2000);
         self::assertThat($timeUnit->minus(TimeUnit::ofMinutes(2))->seconds(), self::equalTo(1880));
+    }
+
+    public function testNow(): void
+    {
+        $now = (int) (new \DateTime())->format('Uv');
+        $timeUnit = TimeUnit::now();
+
+        self::assertThat($timeUnit->millis(), self::greaterThanOrEqual($now));
+        self::assertThat($timeUnit->millis(), self::lessThanOrEqual($now + 500));
     }
 
     /** @return array<array<int>> */
