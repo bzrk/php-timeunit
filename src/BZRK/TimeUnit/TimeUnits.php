@@ -13,9 +13,14 @@ class TimeUnits
         $this->val = $val;
     }
 
-    public static function seconds(): TimeUnits
+    public static function milliSeconds(): TimeUnits
     {
         return new TimeUnits(1);
+    }
+
+    public static function seconds(): TimeUnits
+    {
+        return new TimeUnits(self::milliSeconds()->val * 1000);
     }
 
     public static function minutes(): TimeUnits

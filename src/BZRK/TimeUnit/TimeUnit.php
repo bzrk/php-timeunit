@@ -10,16 +10,16 @@ use function sleep;
 
 class TimeUnit
 {
-    private int $seconds;
+    private int $milliSeconds;
 
-    public function __construct(int $seconds)
+    public function __construct(int $milliSeconds)
     {
-        $this->seconds = $seconds;
+        $this->milliSeconds = $milliSeconds;
     }
 
     public static function now(): self
     {
-        return new TimeUnit(time());
+        return new TimeUnit((int) (new \DateTimeImmutable())->format('Uv'));
     }
 
     private static function create(TimeUnits $timeUnits, int $val): self
@@ -28,6 +28,11 @@ class TimeUnit
             throw new InvalidArgumentException("val must greater than 0");
         }
         return new TimeUnit($val * $timeUnits->val());
+    }
+
+    public static function ofMilliSeconds(int $val): self
+    {
+        return self::create(TimeUnits::milliSeconds(), $val);
     }
 
     public static function ofSeconds(int $val): self
@@ -52,26 +57,26 @@ class TimeUnit
 
     public function seconds(): int
     {
-        return $this->seconds;
+        return (int) $this->milliSeconds / 1000;
     }
 
     public function millis(): int
     {
-        return $this->seconds * 1000;
+        return $this->milliSeconds;
     }
 
     public function sleep(): void
     {
-        sleep($this->seconds);
+        sleep($this->seconds());
     }
 
     public function minus(TimeUnit $timeUnit): self
     {
-        return new TimeUnit($this->seconds - $timeUnit->seconds());
+        return new TimeUnit($this->milliSeconds - $timeUnit->millis());
     }
 
     public function plus(TimeUnit $timeUnit): self
     {
-        return new TimeUnit($this->seconds + $timeUnit->seconds());
+        return new TimeUnit($this->milliSeconds + $timeUnit->millis());
     }
 }
